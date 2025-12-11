@@ -24,13 +24,25 @@ def register_view(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('accounts')
+        return redirect('dashboard:dashboard')
     
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
+            remember_me = form.cleaned_data['remember_me']
+            
+            user = authenticate(request, email=email, password=password)
+            
+            if user is not None:
+                login(request, user)
+                if not remember_me:
+                    request.session.set_expiry(0)
+                return redirect('dashboard:dashboard')
+            else:
+                form.add_error(None, "Invalid email or password. Please try again.")
+                
     else:
         form = LoginForm()
     context = {

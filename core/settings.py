@@ -28,6 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTH_USER_MODEL =  "accounts.CustomUser"
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -145,4 +148,3 @@ TAILWIND_APP_NAME = "theme"
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 
-AUTH_USER_MODEL =  "accounts.CustomUser"

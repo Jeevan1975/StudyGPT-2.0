@@ -7,4 +7,4 @@ class CustomUser(AbstractUser):
     full_name = models.CharField(max_length=200)
     
     def __str__(self):
-        return self.full_name
+        return self.email
