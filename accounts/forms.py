@@ -42,7 +42,13 @@ class RegisterForm(UserCreationForm):
         model = CustomUser
         fields = ["full_name", "email", "password1", "password2"]
             
-        
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if CustomUser.objects.filter(email=email).exists():
+            raise forms.ValidationError('Email is already registered')
+        return email
+    
+    
         
 
 class LoginForm(forms.Form):
