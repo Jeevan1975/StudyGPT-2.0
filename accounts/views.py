@@ -4,7 +4,6 @@ from .forms import LoginForm, RegisterForm
 
 
 
-
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -29,14 +28,14 @@ def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            print("Form is valid")
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             remember_me = form.cleaned_data['remember_me']
             
-            user = authenticate(request, email=email, password=password)
+            print('Email:', type(email))
+            print('Password:', type(password))
             
-            print("user:", user)
+            user = authenticate(request, email=email, password=password)
             
             if user is not None:
                 login(request, user)

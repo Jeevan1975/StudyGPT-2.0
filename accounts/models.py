@@ -5,6 +5,7 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     full_name = models.CharField(max_length=200)
+    email = models.EmailField(unique=True)
     
     def __str__(self):
         return self.email
